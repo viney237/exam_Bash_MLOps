@@ -27,4 +27,17 @@
 #     - Les éventuelles erreurs
 # ==============================================================================
 
+#!/bin/bash
 
+echo "Starting data collection..."
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# Setting up the environment
+"$SCRIPT_DIR/../.venv/bin/python3" \
+"$SCRIPT_DIR/../src/collect.py"
+
+if [ $? -eq 0 ]; then  # $? captures the exit code of the last command
+    echo "Collection successful."
+else
+    echo "Collection failed!" >&2
+    exit 1
+fi
