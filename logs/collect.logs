@@ -1,1 +1,8 @@
-
+2026-11-15 23:50:05,998 - INFO - Fichier chargé : data/raw/sales_data.csv
+2026-11-15 23:50:05,998 - INFO - Prétraitement des timestamps
+2026-11-15 23:50:06,002 - INFO - Encodage des modèles
+2026-11-15 23:51:20,803 - ERROR - Error occurred while collecting data for rtx3060: HTTPConnectionPool(host='0.0.0.0', port=5000): Max retries exceeded with url: /rtx3060 (Caused by NewConnectionError("HTTPConnection(host='0.0.0.0', port=5000): Failed to establish a new connection: [Errno 61] Connection refused"))
+2026-11-15 23:51:20,804 - ERROR - Error occurred while collecting data for rtx3070: HTTPConnectionPool(host='0.0.0.0', port=5000): Max retries exceeded with url: /rtx3070 (Caused by NewConnectionError("HTTPConnection(host='0.0.0.0', port=5000): Failed to establish a new connection: [Errno 61] Connection refused"))
+2026-11-15 23:51:20,804 - ERROR - Error occurred while collecting data for rtx3080: HTTPConnectionPool(host='0.0.0.0', port=5000): Max retries exceeded with url: /rtx3080 (Caused by NewConnectionError("HTTPConnection(host='0.0.0.0', port=5000): Failed to establish a new connection: [Errno 61] Connection refused"))
+2026-11-15 23:51:20,805 - ERROR - Error occurred while collecting data for rtx3090: HTTPConnectionPool(host='0.0.0.0', port=5000): Max retries exceeded with url: /rtx3090 (Caused by NewConnectionError("HTTPConnection(host='0.0.0.0', port=5000): Failed to establish a new connection: [Errno 61] Connection refused"))
+2026-11-15 23:51:20,805 - ERROR - Error occurred while collecting data for rx6700: HTTPConnectionPool(host='0.0.0.0', port=5000): Max retries exceeded with url: /rx6700 (Caused by NewConnectionError("HTTPConnection(host='0.0.0.0', port=5000): Failed to establish a new connection: [Errno 61] Connection refused"))

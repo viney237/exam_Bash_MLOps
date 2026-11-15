@@ -1,3 +1,4 @@
+#!/bin/bash
 # ==============================================================================
 # Script : collect.sh
 # Description :
@@ -26,9 +27,6 @@
 #     - Les ventes récupérées
 #     - Les éventuelles erreurs
 # ==============================================================================
-
-#!/bin/bash
-
 echo "Starting data collection..."
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Setting up the environment

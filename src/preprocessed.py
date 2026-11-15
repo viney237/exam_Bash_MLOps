@@ -16,3 +16,64 @@ Les erreurs ou anomalies éventuelles sont également loguées pour assurer la t
 -------------------------------------------------------------------------------
 """
 
+import os
+import sys
+import glob
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from pathlib import Path
+import logging
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+print(f"Base directory: {BASE_DIR}")
+
+Path(f"{BASE_DIR}/data/preprocessed").mkdir(parents=True, exist_ok=True)
+
+logging.basicConfig(
+    filename=f"{BASE_DIR}/logs/preprocessed.logs",
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+raw_files=glob.glob("data/raw/*")
+
+if not raw_files:
+   logging.error("Aucun fichier trouvé dans data/raw/")
+   sys.exit(1)
+
+last_raw_file = max(raw_files, key=os.path.getmtime)
+
+try:
+    sales = pd.read_csv(last_raw_file)
+    logging.info(f"Fichier chargé : {last_raw_file}")
+except FileNotFoundError:
+    logging.error(f"Fichier introuvable : {last_raw_file}")
+    sys.exit(1)
+
+logging.info("Prétraitement des timestamps")
+
+sales["timestamp"] = pd.to_datetime(sales["timestamp"])
+
+sales["year"] = sales["timestamp"].dt.year
+sales["month"] = sales["timestamp"].dt.month
+sales["day_of_month"] = sales["timestamp"].dt.day
+sales["day_of_week"] = sales["timestamp"].dt.day_of_week
+sales["hour"] = sales["timestamp"].dt.hour
+sales["minute"] = sales["timestamp"].dt.minute
+
+logging.info("Encodage des modèles")
+
+le = LabelEncoder()
+sales["model"] = le.fit_transform(sales["model"])
+
+sales = sales.drop(columns=["timestamp"])
+
+missing = sales.isnull().sum().sum()
+if missing > 0:
+    logging.warning(f"{missing} valeurs manquantes supprimées")
+    sales = sales.dropna()
+
+parts = last_raw_file.split(".")[0].split("_")
+date_str = parts[-2] + "_" + parts[-1]
+sales.to_csv(f"data/preprocessed/sales_processed_{date_str}.csv", index=False)
+logging.info("Fichier de données prétraitées enregistré")

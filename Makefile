@@ -1,8 +1,8 @@
 .PHONY: tests
 
 bash:
-
-
+	bash scripts/collect.sh
+	bash scripts/preprocessed.sh
 
 
 tests:
