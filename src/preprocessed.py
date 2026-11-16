@@ -38,7 +38,7 @@ logging.basicConfig(
 raw_files=glob.glob("data/raw/*")
 
 if not raw_files:
-   logging.error("Aucun fichier trouvé dans data/raw/")
+   logging.error("Aucun fichier CSV trouvé dans le dossier 'data/raw/'.")
    sys.exit(1)
 
 last_raw_file = max(raw_files, key=os.path.getmtime)
@@ -50,7 +50,7 @@ except FileNotFoundError:
     logging.error(f"Fichier introuvable : {last_raw_file}")
     sys.exit(1)
 
-logging.info("Prétraitement des timestamps")
+logging.info("Prétraitement des données en cours...")
 
 sales["timestamp"] = pd.to_datetime(sales["timestamp"])
 
@@ -70,10 +70,10 @@ sales = sales.drop(columns=["timestamp"])
 
 missing = sales.isnull().sum().sum()
 if missing > 0:
-    logging.warning(f"{missing} valeurs manquantes supprimées")
+    logging.warning(f"{missing} valeurs manquantes détectées dans le dataset. Elles seront supprimées.")
     sales = sales.dropna()
 
 parts = last_raw_file.split(".")[0].split("_")
 date_str = parts[-2] + "_" + parts[-1]
 sales.to_csv(f"data/preprocessed/sales_processed_{date_str}.csv", index=False)
-logging.info("Fichier de données prétraitées enregistré")
+logging.info("Prétraitement terminé et fichier enregistré dans data/preprocessed/")
