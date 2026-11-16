@@ -1,0 +1,15 @@
+# Logs
+*.log
+logs/*
+
+# Environment
+.env
+
+#Model
+*.joblib
+models/run_id.txt
+models/model_version.txt
+models/metrics.json
+
+#Data
+data/*
