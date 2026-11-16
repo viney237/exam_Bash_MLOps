@@ -1,0 +1,3 @@
+* * * * * cd /home/ubuntu/exam_PILLA/exam_bash && bash scripts/collect.sh
+* * * * * cd /home/ubuntu/exam_PILLA/exam_bash && bash scripts/preprocessed.sh
+* * * * * cd /home/ubuntu/exam_PILLA/exam_bash && bash scripts/train.sh
